@@ -3,7 +3,50 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Formulario de Inscripción a un Evento</title>
     </head>
-    <body></body>
+    <body>
+        <form action="">
+            <label for="nombre">Nombre Completo</label>
+            <input type="text" id="nombre">
+            <br>
+            
+            <label for="correo">Correo Electronico</label>
+            <input type="email" id="correo">
+            <br>
+            
+            <label for="contraseña">Crear Contraseña</label>
+            <input type="password" id="contraseña">
+            <br>
+            
+            <label for="talleres">Taller de Interés</label>
+            <select name="" id="talleres">
+                <option value="">Programacion</option>
+                <option value="">Ciberseguridad</option>
+                <option value="">Data Science</option>
+            </select>
+            <br>
+            
+            <label>Tipo de Asistencia</label>
+            <br>
+            <label for="presencial">Presencial</label>
+            <input type="radio" name="asistencia" id="presencial">
+            <br>
+            <label for="virtual">Virtual</label>
+            <input type="radio" name="asistencia" id="virtual">
+            <br>
+            
+            <label for="terminos">Acepto los Términos y Condiciones</label>
+            <input type="checkbox" name="terminos">
+            <br>
+            
+            <label for="comentarios">Comentarios Adicionales:</label>
+            <br>
+            <textarea name="comentarios" id="" rows="5"></textarea>
+            <br>
+            
+            <button type="submit">Inscribirme</button>
+        </form>
+        
+    </body>
 </html>
