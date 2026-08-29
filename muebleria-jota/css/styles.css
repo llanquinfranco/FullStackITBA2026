@@ -1,0 +1,31 @@
+
+
+#contenedor-catalogo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+
+.tarjeta-producto {
+    color: black;
+    width: 30%;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.tarjeta-producto h2 {
+    font-size: 40px;
+    
+}
+
+.tarjeta-producto img {
+    width: 100%;
+    height: auto;
+}
+
+.tarjeta-producto p {
+    font-size: 20px;
+}

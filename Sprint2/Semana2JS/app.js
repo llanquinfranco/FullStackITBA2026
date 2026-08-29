@@ -24,7 +24,7 @@ const catalogoMuebles = [
 const contenedor = document.querySelector('#product-container');
 
 catalogoMuebles.forEach(mueble => {
-    const nuevoDiv = document.createElement('div')
+    const nuevoDiv = document.createElement('div');
     nuevoDiv.classList.add('product-card');
 
     const nuevoH3 = document.createElement('h3');
@@ -36,9 +36,9 @@ catalogoMuebles.forEach(mueble => {
     const nuevoIMG = document.createElement('img');
     nuevoIMG.src = mueble.imagenURL;
 
-    nuevoDiv.appendChild(nuevoH3);;
-    nuevoDiv.appendChild(nuevoP);;
-    nuevoDiv.appendChild(nuevoIMG);;
+    nuevoDiv.appendChild(nuevoH3);
+    nuevoDiv.appendChild(nuevoP);
+    nuevoDiv.appendChild(nuevoIMG);
 
     contenedor.appendChild(nuevoDiv);
 });
