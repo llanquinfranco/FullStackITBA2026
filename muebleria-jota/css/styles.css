@@ -4,28 +4,38 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    cursor: pointer;
+    gap: 30px;
+    padding: 20px;
 }
 
 
 
 .tarjeta-producto {
-    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 30%;
-    margin: 40px auto;
+    height: 75vh;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid black;
+    color: black;
     text-align: center;
+    cursor: pointer;
 }
 
 .tarjeta-producto h2 {
-    font-size: 40px;
-    
+    font-size: 35px;
+    margin: 10px 0;
 }
 
 .tarjeta-producto img {
+    height: 250px;
     width: 100%;
-    height: auto;
+    object-fit: contain;
 }
 
 .tarjeta-producto p {
-    font-size: 20px;
+    font-size: 18px;
+    margin-top: auto;
 }
