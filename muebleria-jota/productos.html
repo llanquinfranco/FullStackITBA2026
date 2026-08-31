@@ -1,12 +1,9 @@
-<!-- Persona 2: Catálogo de Productos y Búsqueda
-
-Archivos clave: productos.html, productos.js.
-
-HTML/CSS: Maquetar la grilla responsiva de tarjetas de productos utilizando Flexbox.
-
-JavaScript: Renderizar dinámicamente todas las tarjetas recorriendo el array de productos (imagen, nombre, precio y enlace con parámetro a detalle).
-
-Funcionalidad extra: Implementar el campo/barra de búsqueda para filtrar productos en tiempo real por nombre o categoría -->
+<!-- Catálogo de Productos
+productos.html
+Grilla de tarjetas de productos
+Datos desde archivo JavaScript local
+Cada producto enlaza a su detalle
+Campo de búsqueda (bonus funcional) -->
 
 <!doctype html>
 <html lang="es">
@@ -15,12 +12,12 @@ Funcionalidad extra: Implementar el campo/barra de búsqueda para filtrar produc
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Productos</title>
         <link rel="stylesheet" href="css/styles.css" />
+        <link rel="icon" href="assets/icons/logo.svg">
     </head>
     <body>
         <input type="text" id = "buscador" placeholder="Busque su mueble aquí">
 
         <div id = "contenedor-catalogo"></div>
-        
         
         <script type = "module" src="js/productos.js"></script>
         

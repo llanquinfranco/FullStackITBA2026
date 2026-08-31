@@ -72,7 +72,12 @@ ul a {
     text-align: center;
 }
 
-/* Primero hago todo normal. Despues si hay que adapetarlo a celu o pantallas chicas, primero copio todos los tamaños a la media query y los tamaños predeterminados reducirlos para acomodarlos al celu (Como el h1 y p del hero-banner) */
+/* ===================================================
+   ENFOQUE MOBILE FIRST
+   1. Diseñamos la estructura base pensando exclusivamente en la pantalla de un celular (elementos al 100% de ancho, apilados, sin alturas fijas que rompan el diseño).
+   2. Usamos @media queries con 'min-width' para ir expandiendo y reacomodando la grilla a medida que el dispositivo tiene más espacio disponible (Tablets o PCs).
+   Esto evita que el celular gaste recursos procesando tamaños enormes que después tiene que achicar.
+   =================================================== */
 
 @media (min-width: 768px) {
     .galeria {
