@@ -15,7 +15,12 @@ app.get("/", (req, res) => {
    res.send("¡Bienvenido al servidor de Muebleria Jota!"); 
 });
 
-// El middleware ATRAPA-TODO (404)
+// Ignorar favicon
+app.get("/favicon.ico", (req, res) => {
+    res.status(204).end();
+});
+
+// Middleware ATRAPA-TODO: captura las rutas que no existen (404)
 app.use((req, res, next) => {
     const error = new Error(`Ruta no encontrada: ${req.originalUrl}`);
     error.status = 404;
