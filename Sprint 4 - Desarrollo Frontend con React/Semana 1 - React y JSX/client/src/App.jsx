@@ -4,6 +4,11 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import "./App.css";
 import TarjetaPresentacion from "./components/TarjetaPresentacion";
+import Producto from "./components/Producto";
+import Bio from "./components/Bio";
+import Header from "./components/Header";
+import MainContent from "./components/MainContent";
+import Footer from "./components/Footer";
 
 function App() {
     const [count, setCount] = useState(0);
@@ -23,9 +28,19 @@ function App() {
                     </p>
                 </div>
                 
+                <Header/>
+                
+                <MainContent/>
+                
                 <TarjetaPresentacion/>
                 <TarjetaPresentacion/>
                 <TarjetaPresentacion/>
+                
+                <Producto/>
+                
+                <Bio/>
+                
+                <Footer/>
                 
                 <button type="button" className="counter" onClick={() => setCount((count) => count + 1)}>
                     Count is {count}
