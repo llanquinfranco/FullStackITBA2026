@@ -12,7 +12,7 @@ app.use(express.json());
 app.use("/api/productos", productosRoutes);
 
 app.get("/", (req, res) => {
-   res.send("¡Bienvenido al servidor de Muebleria Jota!"); 
+    res.send("¡Bienvenido al servidor de Muebleria Jota!");
 });
 
 // Ignorar favicon
@@ -33,7 +33,7 @@ app.use((err, req, res, next) => {
     console.error(err.message, err.stack);
     res.status(codigoEstado).json({
         mensaje: err.message || "Ha ocurrido un error en el servidor",
-        stack: process.env.NODE_ENV === "production" ? "eh?": err.stack,
+        stack: process.env.NODE_ENV === "production" ? "eh?" : err.stack,
     });
 });
 
