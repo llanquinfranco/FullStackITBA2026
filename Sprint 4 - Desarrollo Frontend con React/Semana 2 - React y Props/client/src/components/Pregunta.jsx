@@ -20,6 +20,4 @@ function Pregunta() {
     );
 }
 
-
-
 export default Pregunta;

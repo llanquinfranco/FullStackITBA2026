@@ -1,0 +1,43 @@
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.card-personaje {
+    background-color: #111827;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    height: 350px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.card-personaje img {
+    width: 100% !important;
+    height: 190px !important;
+    object-fit: contain !important; /* Hace que el Lego entre entero sin cortarse */
+    margin-bottom: 12px;
+}
+
+.card-personaje h2, 
+.card-personaje h3 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin: 4px 0;
+}
+
+.card-personaje p {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    margin: 0;
+}

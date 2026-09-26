@@ -5,6 +5,8 @@ import "./App.css";
 import Producto from "./components/Producto";
 import Contador from "./components/Contador";
 import Pregunta from "./components/Pregunta";
+import Galeria from "./components/Galeria";
+import Tienda from "./components/Tienda";
 
 function App() {
 
@@ -36,6 +38,10 @@ function App() {
                 <Contador/>
                 
                 <Pregunta/>
+                
+                <Galeria/>
+                
+                <Tienda/>
                 
             </section>
 
