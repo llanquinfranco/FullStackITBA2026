@@ -1,0 +1,127 @@
+/* Paleta del Manual de Marca de Hermanos Jota */
+:root {
+  --siena: #a0522d;
+  --salvia: #87a96b;
+  --alabastro: #f5e6d3;
+  --oro: #d4a437;
+  --rosa: #c47a6d;
+  --marron: #6b4a2f;
+  --tinta: #2a1f17;
+
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--tinta);
+  background: #fbf7f1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 32px;
+  background: var(--alabastro);
+  color: var(--siena);
+}
+
+.navbar h1 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.carrito {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Contenido */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.subtitulo {
+  margin: 0 0 24px;
+  font-family: "Playfair Display", Georgia, serif;
+  color: var(--marron);
+}
+
+.carrito-estado {
+  margin: 0 0 20px;
+  color: var(--marron);
+}
+
+/* Catálogo */
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.producto-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e4d6c3;
+  border-radius: 12px;
+}
+
+.producto-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  background: var(--alabastro);
+}
+
+.producto-card h3 {
+  margin: 4px 0 0;
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.producto-card p {
+  margin: 0;
+}
+
+.precio {
+  font-weight: 600;
+  color: var(--siena);
+}
+
+.producto-card button {
+  margin-top: auto;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--siena);
+  color: #fff;
+  font: 500 0.8rem "Inter", system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.producto-card button:hover {
+  filter: brightness(1.08);
+}
+
+@media (max-width: 600px) {
+  .navbar,
+  main {
+    padding: 16px;
+  }
+}
