@@ -4,7 +4,7 @@ const logger = require("./logger.js");
 
 const productosRoutes = require("./routes/productosRoutes.js");
 
-const PORT = 3000;
+const PORT = 4000;
 
 app.use(logger);
 app.use(express.json());

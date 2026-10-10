@@ -1,17 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-function Catalogo() {
-    const [productos, setProductos] = useState([]);
+function UserDetail({ userId }) {
+    
+    const [usuario, setUsuario] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    
+    
     useEffect(() => {
         const fetchProductos = async () => {
             try {
-                {/* const response = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=8"); */}
-                const response = await fetch("/api/productos");
+                const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
                 const data = await response.json();
-                setProductos(data);
+                setUsuario(data);
             } catch (error) {
                 setError(error);
                 console.error("Error petching products: ", error);
@@ -20,8 +21,8 @@ function Catalogo() {
             }
         };
         fetchProductos();
-    }, []);
-
+    }, [userId]);
+    
     if (loading) {
         return <h2>Cargando productos...</h2>;
     }
@@ -32,13 +33,11 @@ function Catalogo() {
 
     return (
         <>
-            <ul>
-                {productos.map((producto) => (
-                    <li key={producto.id}>{producto.nombre}</li>
-                ))}
-            </ul>
+            <h3>{usuario.name}</h3>
+            <p>{usuario.email}</p>
         </>
     );
+    
 }
 
-export default Catalogo;
+export default UserDetail;
