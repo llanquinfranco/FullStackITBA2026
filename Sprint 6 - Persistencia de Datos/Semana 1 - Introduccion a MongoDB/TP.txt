@@ -1,0 +1,136 @@
+------------------------ EJERCICIO 1 ------------------------
+
+use muebleriaJotaDB
+
+db.productos.insertOne({
+    nombre: "Aparador Uspallata",
+    categoria: "Almacenamiento",
+    precio: 850000,
+    stock: 25
+})
+
+db.productos.insertMany([
+    {
+        nombre: "Biblioteca Recoleta",
+        categoria: "Almacenamiento",
+        precio: 620000,
+        stock: 30
+    },
+    {
+        nombre: "Butaca Mendoza",
+        categoria: "Asientos",
+        precio: 450000,
+        stock: 15
+    },
+    {
+        nombre: "Sillón Copacabana",
+        categoria: "Asientos",
+        precio: 780000,
+        stock: 10
+    },
+    {
+        nombre: "Mesa de Roble",
+        categoria: "Mesas",
+        precio: 510000,
+        stock: 5,
+        material: "Roble"
+    },
+    {
+        nombre: "Mesa de Noche Aconcagua",
+        categoria: "Mesas",
+        precio: 290000,
+        stock: 0
+    },
+    {
+        nombre: "Sofá Patagonia",
+        categoria: "Asientos",
+        precio: 1250000,
+        stock: 8
+    },
+    {
+        nombre: "Mesa Comedor Pampa",
+        categoria: "Mesas",
+        precio: 1100000,
+        stock: 12
+    },
+    {
+        nombre: "Silla de Comedor Clásica",
+        categoria: "Sillas",
+        precio: 8500,
+        stock: 40
+    },
+    {
+        nombre: "Escritorio Costa",
+        categoria: "Oficina",
+        precio: 680000,
+        stock: 20,
+        estado: "descontinuado"
+    },
+    {
+        nombre: "Silla de Trabajo Belgrano",
+        categoria: "Sillas",
+        precio: 590000,
+        stock: 50
+    }
+])
+
+
+
+
+------------------------ EJERCICIO 2 ------------------------
+
+db.productos.find({ categoria: "Sillas" });
+
+db.productos.find({ nombre: "Mesa de Roble" });
+
+db.productos.find({ precio: { $gt: 10000 } });
+
+db.productos.find({ stock: { $lt: 20 } });
+
+db.productos.find().sort({ precio: 1 });
+
+
+
+
+------------------------ EJERCICIO 3 ------------------------
+
+db.productos.updateOne( { nombre: "Silla de Comedor Clásica" }, { $set: { precio: 8200 } } );
+
+db.productos.updateOne( { nombre: "Mesa de Roble" }, { $inc: { stock: 10 } } );
+
+db.productos.updateMany( { precio: { $lt: 9000 } }, { $set: { enOferta: true } } );
+
+
+
+
+------------------------ EJERCICIO 4 ------------------------
+
+db.clientes.insertOne({
+	nombre: "Franco Llanquin",
+	email: "llanquinf@gmail.com",
+  comprasRealizadas: 0
+});
+
+db.clientes.findOne( { email: "llanquinf@gmail.com" } );
+
+db.clientes.updateOne( { email: "llanquinf@gmail.com" }, { $inc: { comprasRealizadas: 1 } } );
+
+db.clientes.deleteOne( { email: "llanquinf@gmail.com" } );
+
+
+
+
+------------------------ EJERCICIO 5 ------------------------
+
+db.productos.insertMany([
+  { nombre: "Mesa Vieja", categoria: "Mesas", precio: 2000, stock: 0 },
+  { nombre: "Sillón Roto", categoria: "Sillones", precio: 5000, stock: 5, estado: "descontinuado" }
+]);
+
+db.productos.deleteOne( { stock: 0 } );
+
+db.productos.deleteMany( { estado: "descontinuado" } );
+
+db.productos.find().pretty();
+
+
