@@ -1,13 +1,14 @@
 require("dotenv").config(); 
 
 const express = require("express");
-const app = express();
+const cors = require("cors");
 const logger = require("./middlewares/logger.js");
-
 const userRoutes = require("./routes/userRoutes.js");
 
+const app = express();
 const PORT = 4000;
 
+app.use(cors);
 app.use(logger);
 app.use(express.json());
 

@@ -2,9 +2,16 @@ const express = require("express");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const verifyToken = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
+// RUTA PROTEGIDA (solo usuarios con un JWT válido pueden acceder)
+router.get("/profile", verifyToken, (req, res) => {
+    res.status(200).json(req.user);
+});
+
+// RUTA PÚBLICA (cualquiera puede acceder)
 router.post("/register", async (req, res) => {
     try {
         // 1. Recibimos los datos del formulario
@@ -42,6 +49,7 @@ router.post("/register", async (req, res) => {
     }
 });
 
+// RUTA PÚBLICA (cualquiera puede acceder)
 router.post("/login", async (req, res) => {
     try {
         // 1. Buscamos al usuario por su email
@@ -77,5 +85,8 @@ router.post("/login", async (req, res) => {
         res.status(500).json({ message: 'Error interno del servidor' });
     }
 });
+
+
+
 
 module.exports = router;
