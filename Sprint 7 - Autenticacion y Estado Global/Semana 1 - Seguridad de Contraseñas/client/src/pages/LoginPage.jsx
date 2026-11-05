@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function LoginPage() {
+function LoginPage({ onLoginSuccess }) {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
 
+    const navigate = useNavigate();
+    
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -24,7 +27,9 @@ function LoginPage() {
             const data = await response.json();
             if (response.ok) {
                 localStorage.setItem("token", data.token);
+                onLoginSuccess(data.user);
                 alert("Login exitoso");
+                navigate("/profile");
             } else {
                 alert(`Error: ${data.message}`);
             }
