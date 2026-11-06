@@ -1,0 +1,17 @@
+Grupo 1
+
+Para arrancar con el TP, copiamos los archivos del kit dentro de nuestra carpeta `/backend`. Al hacer la prueba inicial corriendo `npm run dev` y `npm test`, verificamos que pasaban 0 de 8 tests. Antes de darle instrucciones a la IA, acomodamos el `AGENTS.md` a nuestra arquitectura real (dejando en claro que usamos CommonJS y que nuestro entry point es `server.js`). Toda la práctica la llevamos a cabo utilizando el agente nativo de Cursor, indicándole que resuelva el trabajo avanzando estrictamente fase por fase según el documento `docs/spec-categorias.md`.
+
+Luego, completamos las fases:
+
+Fase 1: El agente creó en models/ el archivo Categoria.js con el campo "nombre" (obligatorio, único y trim, con timestamps). En models/Product.js agregó la referencia a "Categoria" como ObjectId, manteniéndolo opcional. Cumplió con no tocar rutas ni otros archivos.
+
+Fase 2: Se creó routes/categorias.js con los métodos GET y POST, montando la ruta en server.js. Además, se actualizó el manejador central de errores (errorHandler.js) para atajar el error 11000 de duplicados en MongoDB y devolver un 409 con el formato solicitado.
+- Al testear esta fase, tuvimos un error ECONNREFUSED porque los tests buscaban el puerto 3000 por defecto y nuestro servidor corría en el 5000; lo solucionamos ajustando la variable de entorno.
+
+Fase 3: Se modificó routes/productosRoutes.js. El agente agregó correctamente `.populate("categoria", "nombre")` en los endpoints GET, implementó el filtro por query string `?categoria=` y sumó la validación previa para verificar que la categoría exista antes de guardar en los métodos POST y PUT, manteniendo el formato de error exigido por la spec.
+
+Fase 4: Se implementó la lógica en scripts/seedProducts.js para crear las categorías a partir del array y asignar las referencias a los productos. 
+- Desvío/Anomalía detectada: El código generado por el agente para el seed falló con un conflicto de MongoDB ("Updating the path 'nombre' would create a conflict at 'nombre'"). Esto ocurrió porque el agente mezcló `$set` con `$setOnInsert` para el mismo campo al mantener el upsert. Lo corregimos manualmente eliminando el `$setOnInsert`.
+
+Tras aplicar el seed corregido, corrimos por última vez `npm test` y logramos el 8 de 8 pruebas aprobadas.
