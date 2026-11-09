@@ -1,0 +1,29 @@
+/* Estilos para el estado Light (Claro) */
+.light {
+    background-color: #ffffff;
+    color: #1a1a1a;
+    min-height: 100vh;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+/* Estilos para el estado Dark (Oscuro) */
+.dark {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    min-height: 100vh;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+/* Estilos generales opcionales para centrar el contenido */
+div.light,
+div.dark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+}
