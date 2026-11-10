@@ -8,6 +8,8 @@ import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import './App.css';
+import ProductsPage from "./pages/ProductsPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
 
@@ -22,6 +24,8 @@ function App() {
             <Routes>
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/productos" element={<ProductsPage />} />
+                <Route path="/carrito" element={<CartPage />} />
                 <Route
                     path="/profile"
                     element={
@@ -31,8 +35,6 @@ function App() {
                     }
                 />
             </Routes>
-            
-            
         </div>
     );
 }
