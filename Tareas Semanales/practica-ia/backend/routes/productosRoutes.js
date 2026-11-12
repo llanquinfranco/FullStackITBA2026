@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const Product = require("../models/Product");
 const Categoria = require("../models/Categoria");
+const { verificarToken, soloAdmin } = require("../middleware/auth");
 
 const validarCategoriaExistente = async (categoriaId) => {
     if (categoriaId === undefined || categoriaId === null || categoriaId === "") {
@@ -58,7 +59,7 @@ router.get("/:id", async (req, res, next) => {
     res.json(producto);
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", verificarToken, soloAdmin, async (req, res, next) => {
     const { nombre, categoria, precio, imagenUrl, descripcion, detalles, stock } = req.body;
 
     if (!nombre || typeof nombre !== "string" || nombre.trim() === "") {
@@ -88,7 +89,7 @@ router.post("/", async (req, res, next) => {
     res.status(201).json(await Product.findById(nuevoProducto._id).populate("categoria", "nombre"));
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", verificarToken, soloAdmin, async (req, res, next) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -112,7 +113,7 @@ router.put("/:id", async (req, res, next) => {
     res.json(productoActualizado);
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", verificarToken, soloAdmin, async (req, res, next) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {

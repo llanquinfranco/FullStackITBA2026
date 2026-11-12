@@ -9,6 +9,7 @@ const logger = require("./middlewares/logger");
 const { notFound, errorHandler } = require("./middlewares/errorHandler");
 const productosRoutes = require("./routes/productosRoutes");
 const categoriasRoutes = require("./routes/categorias");
+const usuariosRoutes = require("./routes/usuarios");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -43,6 +44,7 @@ app.use("/assets", express.static(path.join(__dirname, "assets")));
 // Rutas de la API
 app.use("/api/categorias", categoriasRoutes);
 app.use("/api/productos", productosRoutes);
+app.use("/api/usuarios", usuariosRoutes);
 
 app.get("/", (req, res) => {
     res.json({
