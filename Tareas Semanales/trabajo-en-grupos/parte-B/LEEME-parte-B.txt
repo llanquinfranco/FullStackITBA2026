@@ -1,0 +1,68 @@
+PARTE B — EL BACKEND DE SU PROYECTO  (18 minutos)
+Clase 8 · Sprint 3 · Mueblería Hermanos Jota
+
+-------------------------------------------------------------------
+QUÉ ES ESTO
+-------------------------------------------------------------------
+Esto no es un ejercicio que se hace, se entrega y se tira.
+Es el backend de "Mueblería Hermanos Jota". El de verdad.
+
+Las dos rutas que completan hoy son las que, en tres semanas,
+va a consumir el React de ustedes:
+
+  GET /api/productos       -> para llenar la grilla del catálogo
+  GET /api/productos/:id   -> para la página de detalle de un mueble
+
+O sea: hoy escriben el lado que contesta. En el Sprint 4 van a
+escribir el lado que pregunta, y se van a conectar entre sí.
+
+Si hoy las dejan andando, esa parte del proyecto ya está lista.
+
+-------------------------------------------------------------------
+CÓMO ARRANCAR
+-------------------------------------------------------------------
+  npm install
+  npm run dev
+
+El servidor NO va a arrancar hasta que completen los TODO.
+El primer error que van a ver es este:
+
+  ReferenceError: ______________________ is not defined
+
+Es esperable: son los huecos. Node les dice el número de línea
+del primero. Arreglan ese, vuelven a correr, y les marca el
+siguiente. De a uno.
+
+-------------------------------------------------------------------
+CÓMO SABEN QUE TERMINARON
+-------------------------------------------------------------------
+Probá las 4 con Thunder Client o Postman. Mirá EL STATUS, no solo
+el texto: el status es lo primero que va a leer el React.
+
+  [ ] GET /                       -> 200 + un texto de bienvenida
+  [ ] GET /api/productos          -> 200 + un ARRAY con los 5 productos
+  [ ] GET /api/productos/2        -> 200 + la Mesa de Roble Macizo
+  [ ] GET /api/productos/999      -> 404 + { "error": "..." }
+
+Las cuatro tienen que dar eso. Si las cuatro dan eso, terminaron.
+
+Dos trampas conocidas:
+  - Si /api/productos/2 te da 404 y el producto 2 está en la lista,
+    el problema no es el producto: es con qué lo estás comparando.
+  - Si /api/productos te devuelve {} con un 200 verde, no es que
+    el catálogo esté vacío. Andá a mirar cómo termina productos.js.
+
+-------------------------------------------------------------------
+DESPUÉS DE LA CLASE (esto es tarea, se hace en grupo)
+-------------------------------------------------------------------
+1. Lleven el server.js al repositorio del grupo.
+2. Reemplacen productos.js por el catálogo real de ustedes, el que
+   vienen usando desde el Sprint 2.
+3. Vuelvan a probar las 4 de arriba con su propio catálogo.
+   (Ojo: los ids de ustedes pueden no ser 1..5. Probá con uno que
+   exista y con uno que no.)
+4. Commit. Ese commit es media entrega del backend.
+
+El jueves arrancamos desde acá: partimos este server.js en pedazos
+para que no se vuelva inmanejable, y agregamos POST para poder
+crear productos, no solo leerlos.

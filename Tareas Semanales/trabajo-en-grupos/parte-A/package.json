@@ -1,0 +1,17 @@
+{
+  "name": "parte-a-ruta-rota",
+  "version": "1.0.0",
+  "description": "Parte A - La ruta rota. Clase 8, Sprint 3.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

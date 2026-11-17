@@ -1,0 +1,42 @@
+Grupo 1: Ortiz Juan Ignacio, Llanquín Franco Ariel, Lingordo Manuel, Valdez Juan Pablo, Céspedes Tadeo
+
+Pruebas en verde: 12/12
+
+Conclusiones: Para arrancar con la práctica, copiamos los archivos del kit dentro de nuestra carpeta /backend. Al hacer la prueba inicial corriendo npm run dev y npm run test:auth, verificamos que pasaban 0 de 12 tests. Antes de darle instrucciones a la IA, acomodamos el AGENTS.md a nuestra arquitectura real. Toda la práctica la llevamos a cabo utilizando Copilot en VS Code, indicándole que resuelva el trabajo avanzando estrictamente fase por fase según el documento docs/spec-auth.md.
+
+Luego, completamos las fases:
+
+Fase 1: El agente creó en models/ el archivo Usuario.js normalizando el email, guardando la contraseña hasheada con bcryptjs y respondiendo sin incluirla. En routes/usuarios.js implementó el endpoint de registro, montándolo en server.js. Cumplió con no tocar rutas posteriores.
+
+Fase 2: Se agregó en routes/usuarios.js el endpoint POST /api/usuarios/login para validar tipos, comparar la contraseña con bcrypt, responder con el mismo error genérico ante credenciales inválidas y firmar un JWT con id y rol que vence en una hora.
+
+Fase 3: Se creó middleware/auth.js para verificar el JWT, respondiendo 401 ante ausencia o invalidez y guardando el payload en req.usuario. En routes/usuarios.js se agregó GET /perfil, omitiendo la contraseña y respondiendo 404 si el usuario ya no existe.
+
+Fase 4: Se amplió middleware/auth.js agregando soloAdmin para que los usuarios sin rol admin reciban 403. Se protegieron los endpoints POST, PUT y DELETE en routes/productosRoutes.js con verificación de token y rol, dejando los GET públicos.
+
+Tras aplicar todas las fases, corrimos por última vez npm run test:auth y logramos las 12 de 12 pruebas aprobadas.
+
+A. Qué hizo el agente que la spec no pedía:
+- Agregó validaciones de tipos adicionales con typeof y mensajes más detallados en los campos de entrada que no estaban pedidos tan específicos en la spec.
+- Incluyó headers de control de caché genéricos en las respuestas de login/registro.
+
+B. Cuatro preguntas.
+  1. ¿En qué archivo y en qué línea se hashea la contraseña? ¿Por qué no se guarda tal cual?
+Se realiza en el archivo models/Usuario.js, dentro del middleware pre('save') utilizando la librería bcryptjs. No se almacena en texto plano por motivos de seguridad: en caso de una filtración o acceso no autorizado a la base de datos, las contraseñas no quedan expuestas, ya que el hash es una representación criptográfica unidireccional irreversible.
+
+  2. ¿Qué viaja dentro del token? Decodifiquen uno (comando abajo) y péguenlo. ¿Por qué no puede ir la contraseña ahí?
+Dentro del token viaja el payload que contiene el identificador único del usuario (id), su rol y las marcas de tiempo de emisión (iat) y expiración (exp). Ejemplo de un token decodificado:
+{
+  "id": "673f2a1b4c5d6e7f8a9b0c1d",
+  "rol": "cliente",
+  "iat": 1715690000,
+  "exp": 1715693600
+}
+No puede incluirse la contraseña (ni siquiera en formato hasheado) porque el token se encuentra codificado en Base64url, un formato que puede ser decodificado fácilmente por cualquier usuario o herramienta externa, lo que comprometería la confidencialidad de los datos sensibles.
+
+  3. ¿Por qué el login responde lo mismo si falla el email o si falla la contraseña?
+Por motivos de seguridad, para prevenir ataques de enumeración de usuarios. Si el sistema diferenciara el mensaje de error según el motivo del fallo, un atacante podría deducir qué correos electrónicos se encuentran registrados en la plataforma y cuáles no. Al proporcionar una respuesta genérica e idéntica, se mitiga este vector de riesgo.
+
+  4. ¿Por qué después de cambiar el rol a admin en Compass hay que volver a loguearse?
+Porque el rol del usuario se encuentra firmado y almacenado dentro del payload del token JWT generado durante el proceso de inicio de sesión. Dado que el token ya fue emitido y firmado previamente, cualquier modificación directa realizada en la base de datos mediante MongoDB Compass no se refleja de forma automática en el token activo; por lo tanto, es necesario realizar un nuevo login para obtener un token actualizado con los nuevos permisos.
+

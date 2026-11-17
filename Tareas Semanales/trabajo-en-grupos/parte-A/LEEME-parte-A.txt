@@ -1,0 +1,65 @@
+PARTE A — LA RUTA ROTA  (12 minutos)
+Clase 8 · Sprint 3 · Mueblería Hermanos Jota
+
+-------------------------------------------------------------------
+LA SITUACIÓN
+-------------------------------------------------------------------
+Ramón, el de la trastienda, intentó levantar la API de la mueblería.
+No le anda. Dejó los archivos como están y se fue a almorzar.
+
+Hay 3 BUGS. Están en server.js y en productos.js.
+
+LA REGLA (la misma del juego): no busques los bugs mirando el código.
+Corré el servidor, LEÉ EL ERROR, y recién ahí abrí el archivo.
+
+-------------------------------------------------------------------
+CÓMO ARRANCAR
+-------------------------------------------------------------------
+  npm install
+  npm run dev
+
+-------------------------------------------------------------------
+LO QUE TIENE QUE PASAR CUANDO ESTÉ ARREGLADO
+-------------------------------------------------------------------
+Terminal:
+  Servidor escuchando en http://localhost:3000
+
+GET http://localhost:3000/api/productos
+  Status 200 — un ARRAY con los 5 productos:
+  [
+    { "id": 1, "nombre": "Silla Nórdica Jota", ... },
+    ... 4 más ...
+  ]
+
+GET http://localhost:3000/api/productos/2
+  Status 200
+  { "id": 2, "nombre": "Mesa de Roble Macizo", "categoria": "mesas",
+    "precio": 189000, "stock": 3 }
+
+GET http://localhost:3000/api/productos/999
+  Status 404
+  { "error": "No existe el producto con id 999" }
+
+-------------------------------------------------------------------
+LOS 3 BUGS FALLAN DE 3 MANERAS DISTINTAS
+-------------------------------------------------------------------
+Esto es la mitad del ejercicio. Anoten cuál es cuál:
+
+  ( ) Uno hace que el servidor NI ARRANQUE.
+  ( ) Uno deja arrancar el servidor, pero la respuesta viene vacía
+      (y con status 200, ojo) y explota cuando pedís un producto.
+  ( ) Uno no da ningún error. El servidor anda perfecto y la
+      respuesta está mal.
+
+El tercero es el importante.
+
+-------------------------------------------------------------------
+PISTAS (usalas recién a los 6 minutos)
+-------------------------------------------------------------------
+Pista 1: leé el primer error completo, sin saltear. El '.' importa.
+Pista 2: ¿de dónde sale 'catalogo'? Andá a productos.js y fijate
+         cómo termina el archivo. ¿Terminaba así en la clase 7?
+Pista 3: pedí http://localhost:3000/api/productos/2 y comparalo con
+         la salida esperada de arriba. Si te da 404 y el producto 2
+         está en la lista... ¿qué está comparando el find?
+         Probá agregar: console.log(typeof req.params.id)
