@@ -24,11 +24,25 @@ export function AuthProvider({ children }) {
         setSesion(null);
     }
 
+    const registrar = async ({ nombre, email, password }) => {
+        const res = await fetch(`${API}/usuarios/registro`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombre, email, password }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+            throw new Error(data.mensaje || "Error al registrarse");
+        }
+        await login(email, password);
+    };
+
     const valor = {
         usuario: sesion ? sesion.usuario : null,
         token: sesion ? sesion.token : null,
         login,
         logout,
+        registrar,
     };
 
     return <AuthContext.Provider value={valor}>{children}</AuthContext.Provider>;

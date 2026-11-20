@@ -95,6 +95,10 @@ import { AuthProvider } from './context/AuthContext.jsx';
 
 **Pregunta para el .txt:** ¿por qué guardamos la sesión en `localStorage` *y* en el estado? ¿Qué pasa si la guardamos solo en uno de los dos?
 
+Guardamos la sesión en ambos lugares porque cumplen funciones complementarias: el estado de React (en el contexto de autenticación) dispara el re-renderizado inmediato de los componentes cuando cambia el usuario o se cierra sesión, mientras que localStorage mantiene los datos guardados ante recargas de página (F5) o cierres del navegador.
+Solo en el estado: al recargar la página se borra la memoria de la app y se pierde la sesión, obligando a iniciar sesión de nuevo.
+Solo en localStorage: la información persiste, pero React no detecta los cambios al hacer login o logout hasta recargar la página, por lo que la interfaz no se actualiza sola al instante.
+
 ---
 
 ## Casilla 2: la página de login (15 min)

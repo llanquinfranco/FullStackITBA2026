@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { API } from "../api.js";
-import {useAuth} from "../context/AuthContext.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
+import { useCart } from "../context/CartContext.jsx";
 
-export default function ProductoDetalle({ onAgregar }) {
+export default function ProductoDetalle() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [producto, setProducto] = useState(null);
     const [error, setError] = useState(null);
-    const { token } = useAuth();
+    const { token, usuario } = useAuth();
+    const { agregarAlCarrito } = useCart();
 
     useEffect(() => {
         async function cargar() {
@@ -49,11 +51,15 @@ export default function ProductoDetalle({ onAgregar }) {
             <p className="precio">${producto.precio}</p>
             <p>Stock: {producto.stock}</p>
             <div className="acciones">
-                <button onClick={() => onAgregar(producto)}>Agregar al carrito</button>
-                <Link to={`/admin/editar-producto/${id}`}>Editar</Link>
-                <button className="peligro" onClick={eliminar}>
-                    Eliminar
-                </button>
+                <button onClick={() => agregarAlCarrito(producto)}>Agregar al carrito</button>
+                {usuario?.rol === "admin" && (
+                    <>
+                        <Link to={`/admin/editar-producto/${id}`}>Editar</Link>
+                        <button className="peligro" onClick={eliminar}>
+                            Eliminar
+                        </button>
+                    </>
+                )}
             </div>
         </section>
     );

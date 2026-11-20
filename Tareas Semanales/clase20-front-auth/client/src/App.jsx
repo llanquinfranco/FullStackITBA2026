@@ -6,40 +6,20 @@ import ProductoDetalle from "./pages/ProductoDetalle.jsx";
 import ProductoForm from "./pages/ProductoForm.jsx";
 import Carrito from "./pages/Carrito.jsx";
 import Login from "./pages/Login.jsx";
+import Registro from "./pages/Registro.jsx";
+import Perfil from "./pages/Perfil.jsx";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
-    // El carrito vive en App y baja por props (prop drilling).
-    const [carrito, setCarrito] = useState(() => JSON.parse(localStorage.getItem("carrito")) || []);
-
-    useEffect(() => {
-        localStorage.setItem("carrito", JSON.stringify(carrito));
-    }, [carrito]);
-
-    function agregarAlCarrito(producto) {
-        setCarrito((actual) => {
-            const existe = actual.find((item) => item._id === producto._id);
-            if (existe) {
-                return actual.map((item) => (item._id === producto._id ? { ...item, cantidad: item.cantidad + 1 } : item));
-            }
-            return [...actual, { _id: producto._id, nombre: producto.nombre, precio: producto.precio, cantidad: 1 }];
-        });
-    }
-
-    function vaciarCarrito() {
-        setCarrito([]);
-    }
-
-    const cantidadTotal = carrito.reduce((total, item) => total + item.cantidad, 0);
-
+    
     return (
         <>
-            <Navbar cantidad={cantidadTotal} />
+            <Navbar />
             <main>
                 <Routes>
-                    <Route path="/" element={<Catalogo onAgregar={agregarAlCarrito} />} />
-                    <Route path="/productos/:id" element={<ProductoDetalle onAgregar={agregarAlCarrito} />} />
-                    <Route path="/carrito" element={<Carrito carrito={carrito} onVaciar={vaciarCarrito} />} />
+                    <Route path="/" element={<Catalogo />} />
+                    <Route path="/productos/:id" element={<ProductoDetalle />} />
+                    <Route path="/carrito" element={<Carrito />} />
                     <Route
                         path="/admin/crear-producto"
                         element={
@@ -56,8 +36,17 @@ export default function App() {
                             </ProtectedRoute>
                         }
                     />
-                    
+
                     <Route path="/login" element={<Login />} />
+                    <Route path="/registro" element={<Registro />} />
+                    <Route
+                        path="/perfil"
+                        element={
+                            <ProtectedRoute>
+                                <Perfil />
+                            </ProtectedRoute>
+                        }
+                    />
                     <Route path="*" element={<p>Página no encontrada</p>} />
                 </Routes>
             </main>

@@ -50,6 +50,10 @@ Si la pantalla queda en blanco con `Cannot destructure property 'agregar' of 'us
 
 ¿Por qué el `CartProvider` va **adentro** del `AuthProvider` y no al revés? ¿Importa? (Pista: piensen qué va a necesitar el carrito cuando tenga que hacer "Finalizar compra" con el token.)
 
+Sí, importa por jerarquía de contextos y consumo de datos. En React, un componente o provider solo puede leer un contexto mediante useContext / su hook (useAuth()) si está por debajo (adentro) del provider correspondiente en el árbol de componentes.
+Cuando el carrito necesite hacer "Finalizar compra" (por ejemplo, enviar el pedido al backend autenticado con el token o asociarlo al usuario actual), CartContext va a poder llamar a useAuth() para acceder a token y usuario.
+Si AuthProvider estuviera adentro de CartProvider, CartContext no tendría acceso a AuthContext (obtendría null). Además, tiene sentido conceptual: primero existe la sesión/autenticación del usuario y, dentro de ese contexto, opera su carrito.
+
 ## Entrega
 
 En el hilo de la clase 20, con lo de hoy: **domingo 22/11, 23:59**.

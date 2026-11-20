@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext.jsx";
 
-export default function Navbar({ cantidad }) {
+export default function Navbar() {
     const { usuario, logout } = useAuth();
+    const { cantidadTotal } = useCart();
+    
     return (
         <nav className="navbar">
             <Link to="/" className="marca">
@@ -12,7 +15,7 @@ export default function Navbar({ cantidad }) {
                 <Link to="/">Catálogo</Link>
                 {usuario?.rol === "admin" && <Link to="/admin/crear-producto">Nuevo producto</Link>}
 
-                <Link to="/carrito">Carrito ({cantidad})</Link>
+                <Link to="/carrito">Carrito ({cantidadTotal})</Link>
 
                 {usuario ? (
                     <>
